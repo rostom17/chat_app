@@ -5,7 +5,6 @@ import 'package:chat_app/core/services/data_base_service.dart';
 import 'package:chat_app/features/chat/data/models/chat_model.dart';
 import 'package:chat_app/features/chat/data/models/message_model.dart';
 
-
 class ChatService {
   static const List<String> _dummyReplies = [
     "Hey! How are you?",
@@ -111,7 +110,7 @@ class ChatService {
 
   static Future<void> initializeSampleChats() async {
     final chats = DatabaseService.getAllChats();
-    
+
     if (chats.isEmpty) {
       final sampleChats = [
         {
@@ -167,3 +166,5 @@ class ChatService {
         Random().nextInt(9999).toString().padLeft(4, '0');
   }
 }
+
+

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:chat_app/core/services/chat_api_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:chat_app/core/services/chat_service.dart';
 import 'package:chat_app/core/services/data_base_service.dart';
@@ -58,6 +59,20 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
         chatId: event.chatId,
         text: event.text,
       );
+
+      //here i will call the chat api
+      final apiResponse = await ChatApiService.sendMessageToApi(
+        chatId,
+        event.text,
+        "message-id",
+        sentMessage,
+      );
+
+      if (apiResponse) {
+        print("Message sent to server succesfully");
+      } else {
+        print("message sent failed");
+      }
 
       final updatedMessages = DatabaseService.getMessagesForChat(event.chatId);
 
