@@ -20,6 +20,10 @@ dependencies:
   flutter_bloc: ^9.1.1
   icons_plus: ^5.0.0
   equatable: ^2.0.8
+  dio: ^5.9.1
+  connectivity_plus: ^7.0.0
+  logger: ^2.6.2
+  dio_smart_retry: ^7.0.1
 
 dev_dependencies:
   flutter_test:
