@@ -15,13 +15,11 @@ class ChatListBloc extends Bloc<ChatListEvent, ChatListState> {
     on<DeleteChat>(_onDeleteChat);
     on<MarkChatAsRead>(_onMarkChatAsRead);
 
-    // Listen to Hive box changes
     _startListeningToChats();
   }
 
   void _startListeningToChats() {
     _chatsSubscription = DatabaseService.chatsBox.watch().listen((event) {
-      // When data changes in Hive, reload chats
       add(LoadChats());
     });
   }
@@ -55,10 +53,8 @@ class ChatListBloc extends Bloc<ChatListEvent, ChatListState> {
         profilePicture: event.profilePicture,
       );
 
-      // Emit created state temporarily, then load all chats
       emit(ChatCreated(chat));
 
-      // Load updated list
       final chats = DatabaseService.getAllChats();
       emit(ChatListLoaded(chats));
     } catch (e) {
@@ -73,10 +69,8 @@ class ChatListBloc extends Bloc<ChatListEvent, ChatListState> {
     try {
       await DatabaseService.deleteChat(event.chatId);
 
-      // Emit deleted state temporarily
       emit(ChatDeleted(event.chatId));
 
-      // Load updated list
       final chats = DatabaseService.getAllChats();
       emit(ChatListLoaded(chats));
     } catch (e) {
@@ -90,8 +84,6 @@ class ChatListBloc extends Bloc<ChatListEvent, ChatListState> {
   ) async {
     try {
       await DatabaseService.markChatAsRead(event.chatId);
-
-      // Load updated list
       final chats = DatabaseService.getAllChats();
       emit(ChatListLoaded(chats));
     } catch (e) {

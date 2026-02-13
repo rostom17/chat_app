@@ -15,16 +15,13 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     on<SendMessage>(_onSendMessage);
     on<MessageStatusUpdated>(_onMessageStatusUpdated);
 
-    // Listen to Hive box changes
     _startListeningToMessages();
 
-    // Load initial messages
     add(LoadMessages(chatId));
   }
 
   void _startListeningToMessages() {
     _messagesSubscription = DatabaseService.messagesBox.watch().listen((event) {
-      // When data changes in Hive, reload messages for this chat
       add(LoadMessages(chatId));
     });
   }
@@ -53,22 +50,17 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     Emitter<ChatMessageState> emit,
   ) async {
     try {
-      // Get current messages
       final currentMessages = DatabaseService.getMessagesForChat(event.chatId);
 
-      // Emit sending state
       emit(MessageSending(messages: currentMessages, chatId: event.chatId));
 
-      // Send the message
       final sentMessage = await ChatService.sendMessage(
         chatId: event.chatId,
         text: event.text,
       );
 
-      // Get updated messages
       final updatedMessages = DatabaseService.getMessagesForChat(event.chatId);
 
-      // Emit sent state
       emit(
         MessageSent(
           message: sentMessage,
@@ -77,7 +69,6 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
         ),
       );
 
-      // Then emit loaded state with all messages
       emit(ChatMessageLoaded(messages: updatedMessages, chatId: event.chatId));
     } catch (e) {
       emit(ChatMessageError(e.toString()));
@@ -91,7 +82,6 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     try {
       await DatabaseService.updateMessageStatus(event.messageId, event.status);
 
-      // Load updated messages
       final messages = DatabaseService.getMessagesForChat(chatId);
       emit(ChatMessageLoaded(messages: messages, chatId: chatId));
     } catch (e) {
