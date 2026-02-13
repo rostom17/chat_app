@@ -5,12 +5,18 @@ class SizeConfig {
   static late double screenWidth;
   static late double screenHeight;
   static late double defaultSize;
+  static late Brightness platformBrightness;
   static late Orientation orientation;
+
+
+  static bool get isDarkMode => platformBrightness == Brightness.dark;
+  static bool get isLightMode => platformBrightness == Brightness.light;
 
   void init(BuildContext context) {
     _mediaQueryData = MediaQuery.of(context);
     screenWidth = _mediaQueryData.size.width;
     screenHeight = _mediaQueryData.size.height;
+    platformBrightness = _mediaQueryData.platformBrightness;
     orientation = _mediaQueryData.orientation;
   }
 }

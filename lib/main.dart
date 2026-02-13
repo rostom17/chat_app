@@ -24,16 +24,16 @@ class ChatApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      debugShowCheckedModeBanner: false,
-      home: Builder(
-        builder: (context) {
-          SizeConfig().init(context);
-          return const ChatListScreen();
-        },
-      ),
+    return Builder(
+      builder: (context) {
+        SizeConfig().init(context);
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          home: const ChatListScreen(),
+        );
+      },
     );
   }
 }
