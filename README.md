@@ -20,7 +20,7 @@
 </ul>
 
 <h2>📥 Download APK</h2>
-<p><a href="YOUR_GOOGLE_DRIVE_LINK_HERE">Download from Google Drive</a></p>
+<p><a href="https://drive.google.com/file/d/1JCbPYS3gZp7Cqusa2ErRdoq2crpt11b2/view?usp=sharing">Download from Google Drive</a></p>
 
 <h2>📸 Screenshots</h2>
 <p>
@@ -40,4 +40,4 @@
 
 <hr />
 
-<p>Replace <code>https://drive.google.com/file/d/1JCbPYS3gZp7Cqusa2ErRdoq2crpt11b2/view?usp=sharing</code> with your actual APK link.</p>
+
