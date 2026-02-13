@@ -35,7 +35,7 @@
   <li>Flutter + Dart</li>
   <li>Bloc (State Management)</li>
   <li>Hive (Local Database)</li>
-  <li>http (Networking)</li>
+  <li>dio(Networking)</li>
 </ul>
 
 <hr />
